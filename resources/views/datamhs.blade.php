@@ -50,6 +50,14 @@
               </td>
             </tr>
             @endforeach
+
+
+            {{-- <tr>
+              <th scope="row">{{ $no++ }}</th>
+              <td>{{ $data->nama }}</td>
+            </tr> --}}
+
+
         </tbody>
       </table>
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 
@@ -14,12 +15,22 @@ use App\Http\Controllers\MahasiswaController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// menampilkan data
-Route::get('/',[MahasiswaController::class, 'index'])->name('mahasiswa');
+Route::get('/dashboard', [MahasiswaController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // menampilkan data
+// Route::get('/mahasiswa',[MahasiswaController::class, 'index'])->name('mahasiswa');
 
 // memasukkan data
 Route::get('/tambahdata',[MahasiswaController::class, 'tambahdata'])->name('tambahdata');
@@ -33,3 +44,15 @@ Route::post('/updatedata/{id}',[MahasiswaController::class, 'updatedata'])->name
 Route::get('/deletedata/{id}',[MahasiswaController::class, 'deletedata'])->name('deletedata');
 
 Route::get('/exportpdf',[MahasiswaController::class, 'exportpdf'])->name('exportpdf');
+
+// // route login
+// Route::get('/', [LoginController::class, 'index']);
+
+// // route register
+// Route::get('/register', [RegisterController::class, 'index']);
+// Route::post('/register', [RegisterController::class, 'store']);
+
+
+});
+
+require __DIR__.'/auth.php';

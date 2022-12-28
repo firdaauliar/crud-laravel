@@ -9,9 +9,21 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class MahasiswaController extends Controller
 {
+    public function dashboard(){
+        // return view('dashboard');
+
+        $data= Mahasiswa::all();
+        // return view('datamhs', compact('data'));
+        return view('dashboard', [
+            'data' => $data
+        ]);    }
+
     public function index(){
         $data= Mahasiswa::all();
         return view('datamhs', compact('data'));
+        // return view('dashboard', [
+        //     'data' => $data
+        // ]);
     }
     public function tambahdata(){
         return view('tambahdata');
@@ -24,7 +36,7 @@ class MahasiswaController extends Controller
             $data->uploadfile = $request->file('uploadfile')->getClientOriginalName();
             $data->save();
         }
-        return redirect()->route('mahasiswa')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('dashboard')->with('success', 'Data berhasil ditambahkan');
     }
     public function tampildataid($id){
         $data = Mahasiswa::find($id);
@@ -35,13 +47,13 @@ class MahasiswaController extends Controller
     public function updatedata( Request $request, $id){
         $data = Mahasiswa::find($id);
         $data->update($request->all());
-        return redirect()->route('mahasiswa')->with('success', 'Data berhasil diubah');
+        return redirect()->route('dashboard')->with('success', 'Data berhasil diubah');
 
     }
     public function deletedata($id){
         $data = Mahasiswa::find($id);
         $data->delete();
-        return redirect()->route('mahasiswa')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('dashboard')->with('success', 'Data berhasil dihapus');
 
     }
 
