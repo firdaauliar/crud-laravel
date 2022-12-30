@@ -56,8 +56,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php $no = 1; @endphp @foreach
-                                            ($data as $row)
+                                            @php $no = 1; @endphp 
+                                            @foreach ($data as $row)
                                             <tr>
                                                 <th scope="row">{{ $no++ }}</th>
                                                 <td>{{ $row -> nama }}</td>
