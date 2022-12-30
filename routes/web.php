@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // menampilkan data
-// Route::get('/mahasiswa',[MahasiswaController::class, 'index'])->name('mahasiswa');
+Route::get('/mahasiswa',[MahasiswaController::class, 'index'])->name('mahasiswa');
 
 // memasukkan data
 Route::get('/tambahdata',[MahasiswaController::class, 'tambahdata'])->name('tambahdata');
